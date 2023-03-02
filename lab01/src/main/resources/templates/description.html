@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Książka kucharska online</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body class="text-uppercase">
+
+<div class="ui-menu w-100">
+    <a class="ui-menu-item p-5 link-dark" th:href="@{/}">Strona główna</a>
+</div>
+<div class="container-fluid text-center">
+    <div>
+        <table class="table table-bordered">
+            <thead class="table-header table-dark">
+            <tr>
+                <th>Składniki</th>
+                <th>Sposób przygotowania</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="description : ${description}">
+                <tr>
+                    <td>[[${description.ingredients}]]</td>
+                    <td>[[${description.steps}]]</td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

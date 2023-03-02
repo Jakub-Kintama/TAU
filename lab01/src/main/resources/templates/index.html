@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Książka kucharska online</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body class="text-uppercase">
+
+<div class="container text-center">
+    <h1>Jakich przepisów szukasz?</h1>
+    <br>
+    <a class="h2 link-dark" th:href="@{/all}"><button class="border-dark bg-light">Wszystkie przepisy</button></a><br>
+    <br>
+    <a class="h2 link-dark" th:href="@{/vege}"><button class="border-dark bg-light">Przepisy wegańskie</button></a><br>
+    <br>
+    <a class="h2 link-dark" th:href="@{/fast}"><button class="border-dark bg-light">Przepisy na szybko</button></a><br>
+</div>
+
+</body>
+</html>
