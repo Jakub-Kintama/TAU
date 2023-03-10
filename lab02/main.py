@@ -1,9 +1,28 @@
-import time
-
 from selenium import webdriver
 import logging
+from selenium.webdriver.common.by import By
 
-logger = logging.getLogger('simple_example')
+
+def basic_login():
+    temp = driver.find_element(By.ID, 'user-name')
+    temp.click()
+    temp.send_keys("standard_user")
+
+    temp = driver.find_element(By.ID, 'password')
+    temp.click()
+    temp.send_keys("secret_sauce")
+
+    temp = driver.find_element(By.ID, 'login-button')
+    temp.click()
+
+    try:
+        driver.find_element(By.ID, 'inventory_container')
+        logger.info("Zalogowano pomyślnie")
+    except:
+        logger.warning("Błąd logowania")
+
+
+logger = logging.getLogger('Login testing lab02')
 logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
 ch.setLevel(logging.DEBUG)
@@ -13,13 +32,10 @@ logger.addHandler(ch)
 
 driver = webdriver.Chrome(executable_path="C:\\Users\\Kintama\\Downloads\\chromedriver_win32\\chromedriver.exe")
 
-logger.info('Przechodzę na stronę Zalando')
-driver.get('https://www.zalando.pl/')
-temp = driver.find_element_by_class_name('z-navicat-header_navToolItemLink')
-temp.click()
-logger.warning('Jakieś ostrzeżenie')
-temp = driver.find_element_by_id('login.email')
-temp.send_keys("login")
-logger.error('Jakiś Error')
+logger.info('Przechodzę na stronę SwagLabs')
+driver.get('https://www.saucedemo.com')
+
+logger.info("Testing basic login")
+basic_login()
 
 driver.close()
