@@ -19,7 +19,7 @@ def basic_login():
         driver.find_element(By.ID, 'inventory_container')
         logger.info("Zalogowano pomyślnie")
     except:
-        logger.warning("Błąd logowania")
+        logger.error("Błąd logowania")
 
 
 logger = logging.getLogger('Login testing lab02')
