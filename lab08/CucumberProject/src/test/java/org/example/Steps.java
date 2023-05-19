@@ -17,29 +17,60 @@ public class Steps {
     public void the_user_is_on_page() {
         driver.get("https://www.saucedemo.com");
     }
-    @When("the user enters valid credentials")
-    public void the_user_enters_valid_credentials() {
+
+    @When("the user enters {string} credentials")
+    public void the_user_enters_credentials(String string) {
         WebElement temp = driver.findElement(By.id("user-name"));
         temp.click();
-        temp.sendKeys("standard_user");
+        temp.sendKeys(string);
 
         temp = driver.findElement(By.id("password"));
         temp.click();
         temp.sendKeys("secret_sauce");
     }
+
     @When("hits submit")
     public void hits_submit() {
         driver.findElement(By.id("login-button")).click();
     }
+
     @Then("the user should be logged in successfully")
     public void the_user_should_be_logged_in_successfully() {
         boolean good = true;
         try {
             driver.findElement(By.id("inventory_container"));
-        }catch (Exception e) {
+        } catch (Exception e) {
             good = false;
         }
         Assert.assertTrue(good);
+    }
+    
+    @Then("the user should not be logged in successfully")
+    public void the_user_should_not_be_logged_in_successfully() {
+        boolean good = true;
+        try {
+            driver.findElement(By.className("error-message-container"));
+        } catch (Exception e) {
+            good = false;
+        }
+        Assert.assertTrue(good);
+    }
+
+    @Then("the user should be logged in successfully after {int} seconds")
+    public void theUserShouldBeLoggedInSuccessfullyAfterSeconds(int arg0) {
+        final long createdMillis = System.currentTimeMillis();
+        boolean good = true;
+        while (System.currentTimeMillis() - createdMillis / 1000 < 10) {
+            try {
+                driver.findElement(By.id("inventory_container"));
+                good = true;
+                break;
+            } catch (Exception e) {
+                good = false;
+            }
+        }
+        Assert.assertTrue(good);
+        Assert.assertTrue(System.currentTimeMillis() - createdMillis / 1000 > arg0);
     }
 
     @After()
